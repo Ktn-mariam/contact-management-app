@@ -8,7 +8,7 @@ export default function App() {
   return (
     <div>
       <Navbar />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <AddContact />
     </div>
   )

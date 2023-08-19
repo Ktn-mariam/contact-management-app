@@ -9,12 +9,23 @@ import { store } from './redux/store'
 import ContactList from './components/ContactList'
 import NoContacts from './components/NoContacts'
 import ContactPage from './pages/ContactPage'
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+import Dashboard from './pages/Dashboard'
+
+const queryClient = new QueryClient()
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <Navbar />
-      <ContactPage />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Navbar />
+        {/* <ContactPage /> */}
+        <Dashboard />
+      </Provider>
+    </QueryClientProvider>
   )
 }

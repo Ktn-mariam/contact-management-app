@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import contactsSliceReducer from './contacts.js'
+import contactsSliceReducer from './contacts'
 
 export interface RootState {
   allContacts: ReturnType<typeof contactsSliceReducer>

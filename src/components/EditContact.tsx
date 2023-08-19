@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Contact } from '../types/dataTypes.js'
-import { updateContact } from '../redux/contacts.js'
+import { Contact } from '../types/dataTypes'
+import { updateContact } from '../redux/contacts'
 
 interface EditContactPropType {
   contact: Contact

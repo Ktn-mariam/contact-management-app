@@ -4,7 +4,7 @@ export interface Contact {
   lastName: string
   email: string
   phoneNo: string
-  status: 'active' | 'inactive'
+  status: string
 }
 
 export interface ContactsState {

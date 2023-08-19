@@ -1,23 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+import { Contact, ContactsState } from '../types/dataTypes'
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     contacts: [],
-    // editContactId: 0,
     status: 'idle',
     error: null,
-  },
+  } as ContactsState,
   reducers: {
-    addContact: (state, action) => {
+    addContact: (state, action: PayloadAction<{ contact: Contact }>) => {
       state.contacts = [action.payload.contact, ...state.contacts]
     },
-    deleteContact: (state, action) => {
-      state.contacts = state.contacts.filter((contact) => {
-        return contact.id !== action.payload
-      })
+    deleteContact: (state, action: PayloadAction<number>) => {
+      state.contacts = state.contacts.filter(
+        (contact) => contact.id !== action.payload,
+      )
     },
-    updateContact: (state, action) => {
+    updateContact: (
+      state,
+      action: PayloadAction<{ id: number; updatedContact: Contact }>,
+    ) => {
       const updatedIndex = state.contacts.findIndex(
         (contact) => contact.id === action.payload.id,
       )
@@ -25,9 +29,6 @@ const contactsSlice = createSlice({
         state.contacts[updatedIndex] = action.payload.updatedContact
       }
     },
-    // updateEditContactId: (state, action) => {
-    //   state.editContactId = action.payload.contactId
-    // },
   },
 })
 
@@ -36,5 +37,4 @@ export const {
   addContact,
   deleteContact,
   updateContact,
-  // updateEditContactId,
 } = contactsSlice.actions

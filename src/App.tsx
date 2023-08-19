@@ -16,15 +16,13 @@ export default function App() {
   const [showSideBar, setShowSideBar] = useState(false)
 
   useEffect(() => {
-    // Set initial value of showSideBar based on screen size
     const handleResize = () => {
-      setShowSideBar(window.innerWidth > 640) // Change the breakpoint as needed
+      setShowSideBar(window.innerWidth > 640)
     }
 
-    handleResize() // Call the function initially
-    window.addEventListener('resize', handleResize) // Listen for resize events
+    handleResize()
+    window.addEventListener('resize', handleResize)
 
-    // Clean up the event listener when component unmounts
     return () => {
       window.removeEventListener('resize', handleResize)
     }

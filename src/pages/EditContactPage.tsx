@@ -1,7 +1,5 @@
-import React from 'react'
-import AddContact from '../components/AddContact'
 import EditContact from '../components/EditContact'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { Contact } from '../types/dataTypes'

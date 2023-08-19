@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react'
-import { addContact } from '../redux/contacts.js'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Contact } from '../types/dataTypes.js'
 import { updateContact } from '../redux/contacts.js'
@@ -19,9 +17,6 @@ const EditContact: React.FC<EditContactPropType> = ({ contact }) => {
   const activeStatusRef = useRef<HTMLInputElement>(null)
   const inactiveStatusRef = useRef<HTMLInputElement>(null)
 
-  const contacts = useSelector((state: RootState) => {
-    return state.allContacts.contacts
-  })
   const dispatch = useDispatch()
   const navigate = useNavigate()
 

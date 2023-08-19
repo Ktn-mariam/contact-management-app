@@ -12,6 +12,7 @@ function LineGraph() {
   })
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>An error has occurred</div>
+
   const options: ApexOptions = {
     chart: {
       height: 350,

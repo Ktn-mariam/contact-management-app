@@ -1,10 +1,12 @@
 import React from 'react'
 import LineGraph from '../components/LineGraph'
+import LeafletMap from '../components/LeafletMap'
 
 function Dashboard() {
   return (
     <div>
-      <LineGraph />
+      <LeafletMap />
+      {/* <LineGraph /> */}
     </div>
   )
 }

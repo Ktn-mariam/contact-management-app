@@ -12,7 +12,7 @@ const LeafletMap: React.FC<LeafletMapPropType> = ({ data }) => {
         center={{ lat: 20, lng: 77 }}
         zoom={5}
         scrollWheelZoom={true}
-        style={{ width: '100%', height: '60vh' }}
+        style={{ width: '100%', height: '60vh', zIndex: 0 }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

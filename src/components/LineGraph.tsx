@@ -41,9 +41,9 @@ function LineGraph() {
       },
     },
     xaxis: {
-      categories: Object.values(data.cases)
+      categories: Object.keys(data.cases)
         .slice(0, 12)
-        .map((value: any) => Number(value)),
+        .map((value: any) => String(value)),
     },
   }
 

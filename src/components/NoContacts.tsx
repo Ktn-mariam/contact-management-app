@@ -2,7 +2,7 @@ import React from 'react'
 
 function NoContacts() {
   return (
-    <div className="bg-white p-6 rounded shadow-md m-20 max-w-md">
+    <div className="bg-white p-6 rounded shadow-md m-20 max-w-lg">
       <div className="flex items-center">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22">

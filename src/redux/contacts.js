@@ -4,6 +4,7 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     contacts: [],
+    // editContactId: 0,
     status: 'idle',
     error: null,
   },
@@ -24,6 +25,9 @@ const contactsSlice = createSlice({
         state.contacts[updatedIndex] = action.payload.updatedContact
       }
     },
+    // updateEditContactId: (state, action) => {
+    //   state.editContactId = action.payload.contactId
+    // },
   },
 })
 
@@ -32,4 +36,5 @@ export const {
   addContact,
   deleteContact,
   updateContact,
+  // updateEditContactId,
 } = contactsSlice.actions

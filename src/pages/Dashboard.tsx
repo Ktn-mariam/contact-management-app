@@ -6,7 +6,7 @@ function Dashboard() {
   return (
     <div>
       <LeafletMap />
-      {/* <LineGraph /> */}
+      <LineGraph />
     </div>
   )
 }

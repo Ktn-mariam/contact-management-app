@@ -1,20 +1,13 @@
-import React from 'react'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
-import SearchBar from './components/SearchBar'
-import AddContact from './components/AddContact'
-import ContactCard from './components/ContactCard'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import ContactList from './components/ContactList'
-import NoContacts from './components/NoContacts'
-import ContactPage from './pages/ContactPage'
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Dashboard from './pages/Dashboard'
+import ContactPage from './pages/ContactPage'
+import AddContactPage from './pages/AddContactPage'
+import EditContactPage from './pages/EditContactPage'
 
 const queryClient = new QueryClient()
 
@@ -22,9 +15,15 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <Navbar />
-        {/* <ContactPage /> */}
-        <Dashboard />
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<ContactPage />} />
+            <Route path="/covid-stats" element={<Dashboard />} />
+            <Route path="/add-contact" element={<AddContactPage />} />
+            <Route path="/edit-contact/:id" element={<EditContactPage />} />
+          </Routes>
+        </Router>
       </Provider>
     </QueryClientProvider>
   )

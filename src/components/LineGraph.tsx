@@ -1,14 +1,15 @@
-import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import ReactApexChart from 'react-apexcharts'
 import { ApexOptions } from 'apexcharts'
 
 function LineGraph() {
   const { isLoading, error, data } = useQuery({
-    queryFn: () =>
-      fetch(
+    queryFn: async () => {
+      const response = await fetch(
         'https://disease.sh/v3/covid-19/historical/all?lastdays=all',
-      ).then((res) => res.json()),
+      )
+      return response.json()
+    },
   })
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>An error has occurred</div>

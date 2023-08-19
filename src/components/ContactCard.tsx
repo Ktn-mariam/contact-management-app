@@ -1,22 +1,32 @@
 import React from 'react'
 import { Contact } from '../types/dataTypes'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { deleteContact } from '../redux/contacts'
 
-interface ContactCardProp {
+interface ContactCardPropType {
   contact: Contact
 }
 
-const ContactCard: React.FC<ContactCardProp> = ({ contact }) => {
+const ContactCard: React.FC<ContactCardPropType> = ({ contact }) => {
   const firstName = contact.firstName
   const lastName = contact.lastName
-  const status = contact.status === 'active' ? false : true
+  const status = contact.status === 'inactive' ? false : true
   const email = contact.email
   const phoneNo = contact.phoneNo
+  const id = contact.id
+
+  const dispatch = useDispatch()
+
+  const deleteContactHandler = () => {
+    dispatch(deleteContact(id))
+  }
 
   return (
     <div
-      className={`bg-${
-        status ? 'red' : 'green'
-      }-100 p-6 flex-col rounded shadow-md mx-5 my-5`}
+      className={`p-6 flex-col rounded shadow-md mx-5 my-5 ${
+        status ? 'bg-red-100' : 'bg-green-100'
+      }`}
     >
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">{`${firstName} ${lastName}`}</h1>
@@ -61,15 +71,20 @@ const ContactCard: React.FC<ContactCardProp> = ({ contact }) => {
         <div className="ml-4">{phoneNo}</div>
       </div>
       <div className="flex">
-        <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 mt-3 rounded inline-flex items-center">
-          <div className="w-6 mr-1">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M20.548 3.452a1.542 1.542 0 0 1 0 2.182l-7.636 7.636-3.273 1.091 1.091-3.273 7.636-7.636a1.542 1.542 0 0 1 2.182 0zM4 21h15a1 1 0 0 0 1-1v-8a1 1 0 0 0-2 0v7H5V6h7a1 1 0 0 0 0-2H4a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1z" />
-            </svg>
-          </div>
-          <span>Edit</span>
-        </button>
-        <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 mt-3 ml-2 rounded inline-flex items-center">
+        <Link to={`edit-contact/${id}`}>
+          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 mt-3 rounded inline-flex items-center">
+            <div className="w-6 mr-1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20.548 3.452a1.542 1.542 0 0 1 0 2.182l-7.636 7.636-3.273 1.091 1.091-3.273 7.636-7.636a1.542 1.542 0 0 1 2.182 0zM4 21h15a1 1 0 0 0 1-1v-8a1 1 0 0 0-2 0v7H5V6h7a1 1 0 0 0 0-2H4a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1z" />
+              </svg>
+            </div>
+            <span>Edit</span>
+          </button>
+        </Link>
+        <button
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 mt-3 ml-2 rounded inline-flex items-center"
+          onClick={deleteContactHandler}
+        >
           <div className="w-6 mr-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M22 5a1 1 0 0 1-1 1H3a1 1 0 0 1 0-2h5V3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1h5a1 1 0 0 1 1 1zM4.934 21.071 4 8h16l-.934 13.071a1 1 0 0 1-1 .929H5.931a1 1 0 0 1-.997-.929zM15 18a1 1 0 0 0 2 0v-6a1 1 0 0 0-2 0zm-4 0a1 1 0 0 0 2 0v-6a1 1 0 0 0-2 0zm-4 0a1 1 0 0 0 2 0v-6a1 1 0 0 0-2 0z" />

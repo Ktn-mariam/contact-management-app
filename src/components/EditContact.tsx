@@ -3,8 +3,14 @@ import { addContact } from '../redux/contacts.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { useNavigate } from 'react-router-dom'
+import { Contact } from '../types/dataTypes.js'
+import { updateContact } from '../redux/contacts.js'
 
-function AddContact() {
+interface EditContactPropType {
+  contact: Contact
+}
+
+const EditContact: React.FC<EditContactPropType> = ({ contact }) => {
   const [inValidInput, setInValidInput] = useState<boolean>(false)
   const firstNameRef = useRef<HTMLInputElement>(null)
   const lastNameRef = useRef<HTMLInputElement>(null)
@@ -35,15 +41,16 @@ function AddContact() {
     const status = isRadioActiveChecked ? 'active' : 'inactive'
 
     if (firstName && lastName && email && phoneNo && status) {
-      const contact = {
+      const updatedContact = {
         firstName,
         lastName,
         email,
         phoneNo,
         status,
-        id: contacts.length + 1,
+        id: contact.id,
       }
-      dispatch(addContact({ contact }))
+      const id = contact.id
+      dispatch(updateContact({ id, updatedContact }))
 
       if (firstNameRef.current) firstNameRef.current.value = ''
       if (lastNameRef.current) lastNameRef.current.value = ''
@@ -60,9 +67,7 @@ function AddContact() {
 
   return (
     <div className="bg-white p-6 rounded shadow-md mx-20 max-w-md">
-      <h2 className="text-2xl font-semibold mb-4 text-center">
-        Create Contact
-      </h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">Edit Contact</h2>
       <form onSubmit={saveContactHandler}>
         <div className="mb-4">
           <label className="block mb-1" htmlFor="firstname">
@@ -72,6 +77,7 @@ function AddContact() {
             ref={firstNameRef}
             className="w-full border rounded py-2 px-3"
             placeholder="Enter your first name"
+            defaultValue={contact.firstName}
           />
         </div>
         <div className="mb-4">
@@ -82,6 +88,7 @@ function AddContact() {
             ref={lastNameRef}
             className="w-full border rounded py-2 px-3"
             placeholder="Enter your last name"
+            defaultValue={contact.lastName}
           />
         </div>
         <div className="mb-4">
@@ -93,6 +100,7 @@ function AddContact() {
             className="w-full border rounded py-2 px-3"
             type="email"
             placeholder="Enter your email"
+            defaultValue={contact.email}
           />
         </div>
         <div className="mb-4">
@@ -103,6 +111,7 @@ function AddContact() {
             ref={phoneNoRef}
             className="w-full border rounded py-2 px-3"
             placeholder="Enter your mobile No"
+            defaultValue={contact.phoneNo}
           />
         </div>
         <div className="mb-4 flex">
@@ -114,7 +123,7 @@ function AddContact() {
               className="form-radio text-blue-500"
               name="status"
               value="active"
-              defaultChecked
+              defaultChecked={contact.status === 'active'}
             />
             <span className="ml-2">Active</span>
           </label>
@@ -125,6 +134,7 @@ function AddContact() {
               className="form-radio text-blue-500"
               name="status"
               value="inactive"
+              defaultChecked={contact.status === 'inactive'}
             />
             <span className="ml-2">Inactive</span>
           </label>
@@ -148,4 +158,4 @@ function AddContact() {
   )
 }
 
-export default AddContact
+export default EditContact

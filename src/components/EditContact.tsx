@@ -61,7 +61,7 @@ const EditContact: React.FC<EditContactPropType> = ({ contact }) => {
   }
 
   return (
-    <div className="bg-white p-6 rounded shadow-md mx-20 max-w-md">
+    <div className="bg-white p-6 rounded shadow-md sm:mx-20 max-w-md">
       <h2 className="text-2xl font-semibold mb-4 text-center">Edit Contact</h2>
       <form onSubmit={saveContactHandler}>
         <div className="mb-4">

@@ -13,8 +13,8 @@ const Sidebar: React.FC<SidebarProps> = ({ showSideBar, setShowSideBar }) => {
         showSideBar ? 'translate-x-0 z-50' : '-translate-x-full z-0'
       } transition-transform duration-300 ease-in-out`}
     >
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold my-3 text-center">CovidSync</h2>
+      <div className="flex justify-between items-center px-5">
+        <h2 className="text-xl font-semibold my-3">CovidSync</h2>
         <button
           className={`w-8 block sm:hidden`}
           onClick={() => {

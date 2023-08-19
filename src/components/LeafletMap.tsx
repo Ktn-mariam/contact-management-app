@@ -1,25 +1,18 @@
-import { useQuery } from '@tanstack/react-query'
-import { CountryType } from '../types/dataTypes'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { CountryType } from '../types/dataTypes'
 
-function LeafletMap() {
-  const { isLoading, error, data } = useQuery({
-    queryFn: () =>
-      fetch('https://disease.sh/v3/covid-19/countries').then((res) =>
-        res.json(),
-      ),
-  })
-  if (isLoading) return <div>Loading...</div>
-  console.log(data)
-  if (error) return <div>An error has occurred</div>
+interface LeafletMapPropType {
+  data: CountryType[]
+}
 
+const LeafletMap: React.FC<LeafletMapPropType> = ({ data }) => {
   return (
-    <div>
+    <div className="mx-10 my-10 d:mx-20 lg:mx-60">
       <MapContainer
         center={{ lat: 20, lng: 77 }}
         zoom={5}
         scrollWheelZoom={true}
-        style={{ width: '80%', height: '50vh' }}
+        style={{ width: '100%', height: '60vh' }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

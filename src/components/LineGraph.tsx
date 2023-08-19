@@ -2,21 +2,18 @@ import { useQuery } from '@tanstack/react-query'
 import ReactApexChart from 'react-apexcharts'
 import { ApexOptions } from 'apexcharts'
 
-function LineGraph() {
-  const { isLoading, error, data } = useQuery({
-    queryFn: async () => {
-      const response = await fetch(
-        'https://disease.sh/v3/covid-19/historical/all?lastdays=all',
-      )
-      return response.json()
-    },
-  })
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>An error has occurred</div>
+interface CasesByDateType {
+  [date: string]: number
+}
 
+interface DataPropType {
+  cases: CasesByDateType
+}
+
+const LineGraph: React.FC<DataPropType> = ({ cases }) => {
   const options: ApexOptions = {
     chart: {
-      height: 350,
+      height: 450,
       width: 200,
       type: 'line',
       zoom: {
@@ -43,7 +40,7 @@ function LineGraph() {
       },
     },
     xaxis: {
-      categories: Object.keys(data.cases)
+      categories: Object.keys(cases)
         .slice(0, 12)
         .map((value: any) => String(value)),
     },
@@ -52,16 +49,15 @@ function LineGraph() {
   const series = [
     {
       name: 'Daily Cases',
-      data: Object.values(data.cases)
+      data: Object.values(cases)
         .slice(0, 12)
         .map((value: any) => Number(value)),
     },
   ]
 
-  console.log(data)
   return (
-    <div className="w-70">
-      <ReactApexChart options={options} series={series} height={350} />
+    <div className="w-70 mx-10 md:mx-20 lg:mx-60">
+      <ReactApexChart options={options} series={series} height={450} />
     </div>
   )
 }

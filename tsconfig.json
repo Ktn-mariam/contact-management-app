@@ -5,7 +5,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "typeRoots": ["node_modules/@types"],
-    // "types": ["react-leaflet"],
+    "types": ["react-leaflet"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

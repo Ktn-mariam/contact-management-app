@@ -16,13 +16,18 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<ContactPage />} />
-            <Route path="/covid-stats" element={<Dashboard />} />
-            <Route path="/add-contact" element={<AddContactPage />} />
-            <Route path="/edit-contact/:id" element={<EditContactPage />} />
-          </Routes>
+          <div className="flex">
+            <Sidebar />
+            <div className="flex-col flex-1 ml-[20%]">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<ContactPage />} />
+                <Route path="/covid-stats" element={<Dashboard />} />
+                <Route path="/add-contact" element={<AddContactPage />} />
+                <Route path="/edit-contact/:id" element={<EditContactPage />} />
+              </Routes>
+            </div>
+          </div>
         </Router>
       </Provider>
     </QueryClientProvider>

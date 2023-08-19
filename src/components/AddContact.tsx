@@ -1,4 +1,7 @@
 import { useRef, useState } from 'react'
+import { addContact } from '../redux/contacts.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../redux/store'
 
 function AddContact() {
   const [inValidInput, setInValidInput] = useState<boolean>(false)
@@ -8,6 +11,11 @@ function AddContact() {
   const phoneNoRef = useRef<HTMLInputElement>(null)
   const statusRef = useRef<HTMLInputElement>(null)
 
+  const contacts = useSelector((state: RootState) => {
+    return state.allContacts.contacts
+  })
+  const dispatch = useDispatch()
+
   const saveContactHandler = (event: React.FormEvent) => {
     event.preventDefault()
     const firstName = firstNameRef.current?.value
@@ -15,15 +23,18 @@ function AddContact() {
     const email = emailRef.current?.value
     const phoneNo = phoneNoRef.current?.value
     const status = statusRef.current?.value
+    console.log(status)
 
     if (firstName && lastName && email && phoneNo && status) {
-      const ContactDetails = {
+      const contact = {
         firstName,
         lastName,
         email,
         phoneNo,
         status,
+        id: contacts.length + 1,
       }
+      dispatch(addContact({ contact }))
 
       if (firstNameRef.current) firstNameRef.current.value = ''
       if (lastNameRef.current) lastNameRef.current.value = ''

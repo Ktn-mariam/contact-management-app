@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function SearchBar() {
+interface SearchBarPropsType {
+  setSearch: React.Dispatch<React.SetStateAction<string | null>>
+}
+
+const SearchBar: React.FC<SearchBarPropsType> = ({ setSearch }) => {
   return (
     <div className="flex justify-center mx-6 items-center mb-3">
       <Link to={'/add-contact'}>
@@ -53,9 +57,12 @@ function SearchBar() {
         </div>
         <input
           type="search"
-          className="block w-full p-2 pl-10 text-md outline-none focus:border-gray-500"
-          placeholder="Search Contact..."
-        ></input>
+          className="block w-full p-2 pl-10 text-md border-r-5 focus:border-gray-500 rounded-lg"
+          placeholder="Search Contact through name..."
+          onChange={(event) => {
+            setSearch(event.target.value)
+          }}
+        />
       </div>
     </div>
   )

@@ -5,14 +5,11 @@ import ContactCard from './ContactCard'
 import { Contact } from '../types/dataTypes'
 import NoContacts from './NoContacts'
 
-function ContactList() {
-  const contacts = useSelector((state: RootState) => {
-    return state.allContacts.contacts
-  })
+interface ContactListPropType {
+  contacts: Contact[]
+}
 
-  if (contacts.length === 0) {
-    return <NoContacts />
-  }
+const ContactList: React.FC<ContactListPropType> =({contacts})=> {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

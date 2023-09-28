@@ -5,7 +5,32 @@ import { Contact, ContactsState } from '../types/dataTypes'
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
-    contacts: [],
+    contacts: [
+      {
+        id: 0,
+        firstName: 'Hazel',
+        lastName: 'Santana',
+        email: 'hazelsantana45@gmail.com',
+        phoneNo: '1234567',
+        status: 'active',
+      },
+      {
+        id: 1,
+        firstName: 'Laurie',
+        lastName: 'Keith',
+        email: 'lauriekeith902@yahoo.com',
+        phoneNo: '879387932',
+        status: 'active',
+      },
+      {
+        id: 2,
+        firstName: 'Charley',
+        lastName: 'Dalton',
+        email: 'charleydalton73@gmail.com',
+        phoneNo: '89734289',
+        status: 'inactive',
+      },
+    ],
     status: 'idle',
     error: null,
   } as ContactsState,

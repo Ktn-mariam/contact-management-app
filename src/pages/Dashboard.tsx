@@ -20,14 +20,6 @@ function Dashboard() {
       ),
   )
 
-  if (lineGraphData.isLoading || leafletDataQuery.isLoading)
-    return <div>Loading...</div>
-  if (lineGraphData.error || leafletDataQuery.error)
-    return <div>Error fetching data.</div>
-
-  console.log('Hiiii')
-  console.log(leafletDataQuery.data)
-
   return (
     <div className=" bg-gray-100 flex-col items-center py-20">
       <div className=" mx-10 md:mx-20 lg:mx-60">
@@ -36,8 +28,20 @@ function Dashboard() {
           deaths in each country
         </div>
       </div>
-      <LeafletMap data={leafletDataQuery.data} />
-      <LineGraph cases={lineGraphData.data.cases} />
+      {leafletDataQuery.isLoading ? (
+        <div className="flex ml-10">LeafLet Map is Loading...</div>
+      ) : leafletDataQuery.error ? (
+        <div className="flex ml-10">Error fetching data.</div>
+      ) : (
+        <LeafletMap data={leafletDataQuery.data} />
+      )}
+      {lineGraphData.isLoading ? (
+        <div className="flex ml-10">Line Graph is Loading...</div>
+      ) : lineGraphData.error ? (
+        <div className="flex ml-10">Error fetching data.</div>
+      ) : (
+        <LineGraph cases={lineGraphData.data.cases} />
+      )}
     </div>
   )
 }
